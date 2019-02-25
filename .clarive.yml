@@ -1,0 +1,18 @@
+build:
+  - shell [Building application]:
+      cmd: cd ${project}/${repository} && mvn package
+      image: 
+        name: maven
+        user: clarive
+test:
+  - shell [Executing unit tests]:
+      cmd: cd ${project}/${repository} && mvn test
+      image: 
+        name: maven
+        user: clarive
+post:
+  - email:
+      body: xxxxxxxxxxxxxxxxxxxx
+      subject: Project ${project}/${repository} deployed to ${environment}
+      to:
+        - ${job_user}
